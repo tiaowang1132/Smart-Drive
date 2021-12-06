@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+    <title>Sign In</title>
+    <link href="{{ url_for('static', filename='mlogin/css/bootstrap.min-3.4.0.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='mlogin/css/font-awesome-4.3.0.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='mlogin/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='mlogin/css/style-2.2.0.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='mlogin/css/index.css') }}" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div class="form-signin">
+            <div id="stage">
+            </div>
+            <h3>Smart Drive Login</h3>
+
+            <form class="m-t" role="form" method="post" action="/admin/file/mindex">
+                <div class="form-group">
+                    <input name="username" type="phone" class="form-control" placeholder="Username :admin" value="admin" required="">
+                </div>
+                <div class="form-group">
+                    <input name="password" type="password" class="form-control" placeholder="Pass :123456"  value="123456" required="">
+                </div>
+
+                <button type="submit" class="btn btn-primary block full-width m-b">Sign In</button>
+                <div class="form-group">
+                    <div class="checkbox i-checks">
+                        <label class="no-padding">
+                            <input type="checkbox" name="remember"><i></i> Remember Pass</label>
+                        <span class="text-muted text-center">
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="{{ url_for('static', filename='mlogin/js/jquery-2.1.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='mlogin/js/bootstrap.min-3.4.0.js') }}"></script>
+    <script type="{{ url_for('static', filename='mlogin/text/javascript') }}">
+        function stop() {
+            return false;
+        }
+        document.oncontextmenu = stop;
+    </script>
+    <script src="{{ url_for('static', filename='mlogin/jjs/live2d.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='mlogin/js/index.js') }}"></script>
+</body>
+
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_c47ed667c69e4788bc11a9d5382a7305 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_c47ed667c69e4788bc11a9d5382a7305" ></div>
+        
+</body>
+<script>    
+    
+            var map_c47ed667c69e4788bc11a9d5382a7305 = L.map(
+                "map_c47ed667c69e4788bc11a9d5382a7305",
+                {
+                    center: [0, 0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 1,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_0b806998ebad474ea1068ca07e1e0cdc = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_c47ed667c69e4788bc11a9d5382a7305);
+        
+    
+            var marker_a4e5784649ef4b8d86e0c7628cdd79b2 = L.marker(
+                [39.95, 118.33],
+                {}
+            ).addTo(map_c47ed667c69e4788bc11a9d5382a7305);
+        
+    
+        var popup_a0e0acf4bd0e43888187512a5474471a = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6e8955e18f944021870a8e620885708c = $(`<div id="html_6e8955e18f944021870a8e620885708c" style="width: 100.0%; height: 100.0%;"><a href=http://127.0.0.1:5000/admin/file/select?city=Beijing>Beijing</a></div>`)[0];
+            popup_a0e0acf4bd0e43888187512a5474471a.setContent(html_6e8955e18f944021870a8e620885708c);
+        
+
+        marker_a4e5784649ef4b8d86e0c7628cdd79b2.bindPopup(popup_a0e0acf4bd0e43888187512a5474471a)
+        ;
+
+        
+    
+    
+            var marker_60da14c6b66a45d58dfe75839195a988 = L.marker(
+                [30.0, 120.33],
+                {}
+            ).addTo(map_c47ed667c69e4788bc11a9d5382a7305);
+        
+    
+        var popup_32fa9f4fe452428bb1be4c2ceb8a5dce = L.popup({"maxWidth": "100%"});
+
+        
+            var html_89adb225cb994843b17653c3fd4c8438 = $(`<div id="html_89adb225cb994843b17653c3fd4c8438" style="width: 100.0%; height: 100.0%;"><a href=http://127.0.0.1:5000/admin/file/select?city=Shanghai>Shanghai</a></div>`)[0];
+            popup_32fa9f4fe452428bb1be4c2ceb8a5dce.setContent(html_89adb225cb994843b17653c3fd4c8438);
+        
+
+        marker_60da14c6b66a45d58dfe75839195a988.bindPopup(popup_32fa9f4fe452428bb1be4c2ceb8a5dce)
+        ;
+
+        
+    
+    
+            var marker_3bbe9532b59246edac1083c44c3edcdc = L.marker(
+                [34.0, 110.0],
+                {}
+            ).addTo(map_c47ed667c69e4788bc11a9d5382a7305);
+        
+    
+        var popup_9b4db60d4cf94c86932f27cd1929fb9a = L.popup({"maxWidth": "100%"});
+
+        
+            var html_693d6706e79d46d4b0dae74941754dd7 = $(`<div id="html_693d6706e79d46d4b0dae74941754dd7" style="width: 100.0%; height: 100.0%;"><a href=http://127.0.0.1:5000/admin/file/select?city=Chongqing>Chongqing</a></div>`)[0];
+            popup_9b4db60d4cf94c86932f27cd1929fb9a.setContent(html_693d6706e79d46d4b0dae74941754dd7);
+        
+
+        marker_3bbe9532b59246edac1083c44c3edcdc.bindPopup(popup_9b4db60d4cf94c86932f27cd1929fb9a)
+        ;
+
+        
+    
+    
+            var marker_445cc2fa155b4f56a5b893415d900fe8 = L.marker(
+                [43.0, -79.0],
+                {}
+            ).addTo(map_c47ed667c69e4788bc11a9d5382a7305);
+        
+    
+        var popup_83f9c2ca2eff461db8a6eaeb1734e6b8 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d66192c1448a4ddba8966baea0a5661d = $(`<div id="html_d66192c1448a4ddba8966baea0a5661d" style="width: 100.0%; height: 100.0%;"><a href=http://127.0.0.1:5000/admin/file/select?city=Toronto>Toronto</a></div>`)[0];
+            popup_83f9c2ca2eff461db8a6eaeb1734e6b8.setContent(html_d66192c1448a4ddba8966baea0a5661d);
+        
+
+        marker_445cc2fa155b4f56a5b893415d900fe8.bindPopup(popup_83f9c2ca2eff461db8a6eaeb1734e6b8)
+        ;
+
+        
+    
+    
+            var marker_943c4f227e5d4c28957d2d148d0ce9da = L.marker(
+                [48.0, -123.0],
+                {}
+            ).addTo(map_c47ed667c69e4788bc11a9d5382a7305);
+        
+    
+        var popup_8b011a0fb28d40b68fd848e1d3de3f43 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a57f0fe7b07a4509b6d62b5aaee4a6b5 = $(`<div id="html_a57f0fe7b07a4509b6d62b5aaee4a6b5" style="width: 100.0%; height: 100.0%;"><a href=http://127.0.0.1:5000/admin/file/select?city=Victoria>Victoria</a></div>`)[0];
+            popup_8b011a0fb28d40b68fd848e1d3de3f43.setContent(html_a57f0fe7b07a4509b6d62b5aaee4a6b5);
+        
+
+        marker_943c4f227e5d4c28957d2d148d0ce9da.bindPopup(popup_8b011a0fb28d40b68fd848e1d3de3f43)
+        ;
+
+        
+    
+</script>

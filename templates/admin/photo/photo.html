@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Management</title>
+    {% include 'admin/common/header.html' %}
+    <style>
+        .layui-form-select{
+            display: inline-block;
+        }
+        .layui-form-select dl dd.layui-this{
+            color: #FFF;
+        }
+        .layui-table-tool .layui-table-tool-self{
+            display: none;
+        }
+
+    </style>
+</head>
+<body class="pear-container">
+<div class="layui-card">
+
+    <div class="layui-card-body">
+        <table id="dataTable" lay-filter="dataTable"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolbar">
+    {% if authorize("admin:file:add") %}
+        <button class="pear-btn pear-btn-primary pear-btn-sm" lay-event="add">
+            <i class="layui-icon layui-icon-add-1"></i>
+            Add
+        </button>
+    {% endif %}
+    {% if authorize("admin:file:delete") %}
+        <button class="pear-btn pear-btn-sm" lay-event="batchRemove">
+            <i class="layui-icon layui-icon-delete"></i>
+            Delete
+        </button>
+    <select lay-verify="required" id="citylist22" class="Selectcity"  lay-filter="demo">  </select>
+    {% endif %}
+
+
+</script>
+
+<script type="text/html" id="user-bar">
+    {% if authorize("admin:file:delete") %}
+        <button class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove"><i
+                class="layui-icon layui-icon-delete"></i></button>
+    {% endif %}
+    {% if authorize("admin:file:delete") %}
+        <button class="pear-btn pear-btn-primary pear-btn-sm" lay-event="download"><i
+                class="layui-icon layui-icon-download-circle"></i></button>
+    {% endif %}
+</script>
+
+<script type="text/html" id="file-uploadTime">
+    {{ '  {{layui.util.toDateString(d.create_time,  "yyyy-MM-dd HH:mm:ss")}' |safe }}}
+</script>
+{% include 'admin/common/footer.html' %}
+<script>
+  layui.use(['table', 'form', 'jquery'], function () {
+    let table = layui.table
+    let form = layui.form
+    let $ = layui.jquery
+    let cols = [
+      [
+        {
+          type: 'checkbox'
+        },
+        {
+          field: 'id',
+          title: 'ID',
+          sort: true,
+          align: 'center',
+          unresize: true,
+          width: 80
+        },
+        {
+          field: 'name',
+          title: 'File Name',
+          unresize: true,
+          align: 'center'
+        },
+        {
+          field: 'city',
+          title: 'City',
+          unresize: true,
+          align: 'center',
+
+        },
+        {
+          field: 'mime',
+          title: 'Mime Type',
+          unresize: true,
+          align: 'center'
+        },
+        {
+          field: 'size',
+          title: 'File Size',
+          unresize: true,
+          align: 'center'
+        },
+          {
+          field: 'href',
+          title: 'Photo View',
+          unresize: true,
+          align: 'center',
+          templet: function (d) {
+            return '<img class="photo" style="max-width: 100%;\n' +
+              '  height: 100%;\n' +
+              '  cursor: pointer;" lay-event="photo" src=" ' + d.href + '"></i>'
+          }
+
+        },
+        {
+          field: 'create_time',
+          title: 'Create Time',
+          templet: '#file-uploadTime',
+          unresize: true,
+          align: 'center'
+        },
+        {
+          title: 'Operate',
+          toolbar: '#user-bar',
+          align: 'center',
+          unresize: true,
+          width: 200
+        }
+      ]
+    ]
+
+
+    form.render()
+    table.render({
+      elem: '#dataTable',
+      id:'alltable',
+      url: 'table',
+      page: true,
+      cols: cols,
+      skin: 'line',
+      toolbar: '#toolbar',
+      defaultToolbar: [{
+        layEvent: 'refresh',
+        icon: 'layui-icon-refresh',
+      }, 'filter', 'print', 'exports']
+        ,done:function getcitylist() {
+         $.ajax({
+          url: 'citylist',
+          type: 'get',
+          dataType:"json",
+          success: function (res) {
+              var list = res.city;
+              var select = document.getElementById('citylist22');
+                if (list != null || list.size() > 0) {
+                  for (var c in list) {
+                    var option = document.createElement("option");
+                    option.setAttribute("value", list[c]);
+                    option.innerText = list[c];
+                    select.appendChild(option)
+                    form.render()
+    }}; },
+          error:function (err) {
+                 console.log(err)
+             }})
+} ,
+    })
+//         $(function getcitylist() {
+//          $.ajax({
+//           url: 'citylist',
+//           type: 'get',
+//           dataType:"json",
+//           success: function (res) {
+//               var list = res.city;
+//               var select = document.getElementById('citylist22');
+//                 if (list != null || list.size() > 0) {
+//                   for (var c in list) {
+//                     var option = document.createElement("option");
+//                     option.setAttribute("value", list[c]);
+//                     option.innerText = list[c];
+//                     select.appendChild(option)
+//                     form.render()
+//     }}; },
+//           error:function (err) {
+//                  console.log(err)
+//              }})
+// })
+             form.on('select(demo)', function(data){
+        	    //alert(data.value)
+                //console.log(data)
+                 table.reload('alltable',{
+                where: {'city':data.value}
+             });
+             //    $.ajax({
+             //        url: 'select?city='+data.value,
+             //        type: 'get',
+             //        dataType: "json",
+             //        success: function (res) {
+             //            console.log('--------')
+             //            // form.render()
+             //            //table.render({where: { "city": "{{ cityn }}" }},
+             //            //)
+             //        }
+             //    })
+            })
+    table.on('tool(dataTable)', function (obj) {
+      if (obj.event === 'remove') {
+        window.remove(obj)
+      } else if (obj.event === 'photo') {
+        window.photo(obj)
+      } else if(obj.event === 'download') {
+        window.download(obj)
+      }
+    })
+
+    table.on('toolbar(dataTable)', function (obj) {
+      if (obj.event === 'add') {
+        window.add()
+      } else if (obj.event === 'refresh') {
+        window.refresh()
+      } else if (obj.event === 'batchRemove') {
+        window.batchRemove(obj)
+      } else if (obj.event === 'select') {
+          window.select(obj)
+      }
+    })
+
+    //弹出窗设置 自己设置弹出百分比
+    function screen () {
+      if (typeof width !== 'number' || width === 0) {
+        width = $(window).width() * 0.8
+      }
+      if (typeof height !== 'number' || height === 0) {
+        height = $(window).height() - 20
+      }
+      return [width + 'px', height + 'px']
+    }
+
+    window.add = function () {
+      layer.open({
+        type: 2,
+        maxmin: true,
+        title: 'Add File',
+        shade: 0.1,
+        area: screen(),
+        content: 'upload'
+      })
+    }
+
+    window.remove = function (obj) {
+      layer.confirm('Confirm to Delete', {
+        icon: 3,
+        title: 'Warning'
+      }, function (index) {
+        layer.close(index)
+        let loading = layer.load()
+        $.ajax({
+          url: 'delete',
+          data: { id: obj.data['id'] },
+          dataType: 'json',
+          type: 'POST',
+          success: function (res) {
+            layer.close(loading)
+            if (res.success) {
+              layer.msg(res.msg, {
+                icon: 1,
+                time: 1000
+              }, function () {
+                obj.del()
+              })
+            } else {
+              layer.msg(res.msg, {
+                icon: 2,
+                time: 1000
+              })
+            }
+          }
+        })
+      })
+    }
+
+
+    window.download = function (obj) {
+      layer.confirm('Confirm to Download', {
+        icon: 3,
+        title: 'Warning'
+      }, function (index) {
+        layer.close(index)
+        let loading = layer.load()
+        $.ajax({
+          url: 'download',
+          data: { id: obj.data['id'] },
+          dataType: 'json',
+          type: 'POST',
+          success: function (res) {
+            layer.close(loading)
+            if (res.success) {
+              layer.msg(res.msg, {
+                icon: 1,
+                time: 1000
+              }, function () {
+                obj.del()
+              })
+            } else {
+              layer.msg(res.msg, {
+                icon: 2,
+                time: 1000
+              })
+            }
+          }
+        })
+      })
+    }
+
+    window.batchRemove = function (obj) {
+      let data = table.checkStatus(obj.config.id).data
+      if (data.length === 0) {
+        layer.msg('未选中数据', {
+          icon: 3,
+          time: 1000
+        })
+        return false
+      }
+      var ids = []
+      var hasCheck = table.checkStatus('dataTable')
+      var hasCheckData = hasCheck.data
+      if (hasCheckData.length > 0) {
+        $.each(hasCheckData, function (index, element) {
+          ids.push(element.id)
+        })
+      }
+      layer.confirm('Confirm to Delete', {
+        icon: 3,
+        title: 'Warning'
+      }, function (index) {
+        layer.close(index)
+        let loading = layer.load()
+        $.ajax({
+          url: "{{ url_for('adminFile.batch_remove') }}",
+          data: { ids: ids },
+          dataType: 'json',
+          type: 'POST',
+          success: function (res) {
+            layer.close(loading)
+            if (res.success) {
+              layer.msg(res.msg, {
+                icon: 1,
+                time: 1000
+              }, function () {
+                table.reload('dataTable')
+              })
+            } else {
+              layer.msg(res.msg, {
+                icon: 2,
+                time: 1000
+              })
+            }
+          }
+        })
+      })
+    }
+
+    window.refresh = function () {
+      table.reload('dataTable')
+    }
+    // 查看大图
+    window.photo = function (obj) {
+      if (!obj.data.href || obj.data.href === '') {
+        layer.msg('图片地址错误！')
+        return
+      }
+      var auto_img = {}
+      var img = new Image()
+      img.src = obj.data.href
+      img.onload = function () {
+        var max_height = $(window).height() - 100
+        var max_width = $(window).width()
+        var rate1 = max_height / img.height
+        var rate2 = max_width / img.width
+        var rate3 = 1
+        var rate = Math.min(rate1, rate2, rate3)
+        auto_img.height = img.height * rate
+        auto_img.width = img.width * rate
+        layer.open({
+          type: 1,
+          title: false,
+          area: ['auto'],
+          skin: 'layui-layer-nobg', //没有背景色
+          shadeClose: true,
+          content: '<img src=\'' + obj.data['href'] + '\' width=\'' + auto_img.width + 'px\' height=\'' + auto_img.height + 'px\'>'
+        })
+      }
+    }
+
+
+
+  })
+
+
+
+
+</script>
